@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="ru">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">    
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header id="site-header" class="site-header">
+    <div class="logo">
+      <a class="image" href="#"> <img src="images/SGN_09_24_2022_1663968217400 1.svg"></a>
+    </div>
+    <div id="nav" class="nav">
+      <a class="nav-item" href="#">Главная</a>
+      <a class="nav-item" href="#">Тарифы</a>
+      <a class="nav-item" href="#">FAQ</a>
+      <div id="root"></div>
+
+    </div>
+    <div id="user-panel" class="user-panel">
+      <div id="loader" class="loader">Загрузка...</div>
+      <div id="company-info" class="company-info hidden">
+        <p id="company-limit"></p>
+        <p id="company-used"></p>
+      </div>
+    </div>
+  </header>
+  
+  <main>
+    <div class="service">
+      <div class="picture"><img src="images/group.svg"></div>
+      <div class="text">Сервис по поиску публикаций о компаниии по его ИНН</div>
+      <div class="promt">Запросить данные</div>
+    </div>
+  </main>
+
+  <footer>
+  </footer>
+
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="script.js" type="module"></script>
+</body>
+</html>
