@@ -8,6 +8,10 @@ function Header() {
   const [token, setToken] = useState(null);
   const [loginSuccess, setLoginSuccess] = useState(false); // новое состояние для успешного входа
 
+
+
+
+  
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
@@ -67,6 +71,27 @@ function Header() {
     loginSuccess && React.createElement('div', { id: 'success-message', className: 'success-message' }, 'Вы успешно вошли в систему!') // отображение сообщения об успешном входе
     // Ваш код
   );
+}
+function handleLoginSuccess(user) {
+  // Загрузка данных пользователя
+  fetch('https://gateway.scan-interfax.ru/api/v1/account/info')
+    .then(response => response.json())
+    .then(data => {
+      // Обновление интерфейса с данными пользователя
+      const userPanel = document.getElementById('user-panel');
+      userPanel.innerHTML = `
+        <img src="${data.avatarUrl}" alt="User Avatar" />
+        <div>
+          <p>Имя: ${user.name}</p>
+          <p>Лимит компаний: ${data.companyLimit}</p>
+          <p>Используется компаний: ${data.usedCompanies}</p>
+        </div>
+        <button onclick="handleLogout()">Выйти</button>
+      `;
+    })
+    .catch(error => {
+      console.error('Ошибка при загрузке данных пользователя:', error);
+    });
 }
 
 ReactDOM.render(React.createElement(Header), document.getElementById('root'));
