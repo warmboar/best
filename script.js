@@ -73,26 +73,56 @@ function Header() {
   );
 }
 function handleLoginSuccess(user) {
-  // Загрузка данных пользователя
-  fetch('https://gateway.scan-interfax.ru/api/v1/account/info')
-    .then(response => response.json())
-    .then(data => {
-      // Обновление интерфейса с данными пользователя
-      const userPanel = document.getElementById('user-panel');
-      userPanel.innerHTML = `
-        <img src="${data.avatarUrl}" alt="User Avatar" />
-        <div>
-          <p>Имя: ${user.name}</p>
-          <p>Лимит компаний: ${data.companyLimit}</p>
-          <p>Используется компаний: ${data.usedCompanies}</p>
-        </div>
-        <button onclick="handleLogout()">Выйти</button>
-      `;
-    })
-    .catch(error => {
-      console.error('Ошибка при загрузке данных пользователя:', error);
-    });
+// Загрузка данных пользователя
+fetch('https://gateway.scan-interfax.ru/api/v1/account/info')
+  .then(response => response.json())
+  .then(data => {
+    // Сохранение данных пользователя в переменной
+    const userData = data;
+
+    // Обновление интерфейса с данными пользователя
+    const userPanel = document.getElementById('user-panel');
+    userPanel.innerHTML = `
+      <img src="${userData.avatarUrl}" alt="User Avatar" />
+      <div>
+        <p>Имя: ${user.name}</p>
+        <p>Лимит компаний: ${userData.companyLimit}</p>
+        <p>Используется компаний: ${userData.usedCompanies}</p>
+      </div>
+      <button onclick="handleLogout()">Выйти</button>
+    `;
+
+    // Обновление другого элемента на странице
+    const apiDataElement = document.getElementById('api-data');
+    apiDataElement.innerHTML = `
+      <p>Использовано компаний: ${userData.usedCompanies}</p>
+      <p>Лимит по компаниям: ${userData.companyLimit}</p>
+    `;
+  })
+  .catch(error => {
+    console.error('Ошибка при загрузке данных пользователя:', error);
+  });
+
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      try {
+          const response = await fetch("https://gateway.scan-interfax.ru/api/v1/account/info"); // Замените на ваш URL API
+          if (!response.ok) {
+              throw new Error("Ошибка при получении данных");
+          }
+          const data = await response.json();
+          const apiDataElement = document.getElementById("api-data");
+          apiDataElement.innerHTML = `
+              <p>Использовано компаний: ${data.usedCompanies}</p>
+              <p>Лимит по компаниям: ${data.companyLimit}</p>
+          `;
+      } catch (error) {
+          console.error("Ошибка:", error);
+      }
+  });
 }
+
+
 
 ReactDOM.render(React.createElement(Header), document.getElementById('root'));
 

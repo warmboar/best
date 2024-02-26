@@ -138,11 +138,25 @@ body {
   margin: 10px;
 }
 
-.user-panel {
+/* Стили для user-panel */
+#user-panel {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 1rem;
+  /* Добавьте другие стили по вашему усмотрению */
 }
+
+#user-panel img {
+  max-width: 100px;
+  /* Добавьте другие стили для изображения */
+}
+
+/* Стили для api-data */
+#api-data {
+  margin-top: 1rem;
+  /* Добавьте другие стили по вашему усмотрению */
+}
+
 
 .loader {
   display: none;
